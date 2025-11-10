@@ -1,0 +1,65 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #ccc;
+    cursor: url('../img/ico/straight-line_icon.ico'), auto;
+}
+
+main {
+    padding: 1ch;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#controls {
+    display: flex;
+    gap: 1ch;
+}
+.radio_symbol {
+    position: relative;
+    height: 3ch;
+    width: 3ch;
+
+    display: flex;
+
+    transition: 0.4s;
+}
+.radio_symbol:hover {
+    background-color: #eee;
+}
+.radio_symbol input[type='radio'] {
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+.radio_symbol label {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tool_icon {
+    height: 80%;
+    width: 80%;
+}
+.radio_symbol:has(input[type='radio']:checked){
+    background-color: #eee;
+    outline: 1px #000 solid;
+}
+
+#paint_board {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}

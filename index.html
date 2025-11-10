@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint</title>
+    <link rel="stylesheet" href="./assets/styles/index_style.css">
+    <script src="./assets/scripts/index_script.js" defer></script>
 </head>
 <body>
-    <h1>Olá, Mundo!</h1>
+    <main>
+        <article id="control_bar">
+            <form id="controls">
+                <input type="color" name="color" id="colorInput" class="tools_icon">
+                <div class="radio_symbol">
+                    <input type="radio" id="paint-brush" value="paint-brush" name="selectedTool" checked="checked" class="tools_icon">
+                    <label for="paint-brush">
+                        <img class="tool_icon" src="./assets/img/svg/paint-brush_icon.svg" alt="ícone de pincel">
+                    </label>
+                </div>
+                <div class="radio_symbol">
+                    <input type="radio" value="bucket" name="selectedTool" class="tools_icon">
+                    <label for="bucket">
+                        <img class="tool_icon" src="./assets/img/svg/bucket_icon.svg" alt="ícone de pincel">
+                    </label>
+                </div>
+                <div class="radio_symbol">
+                    <input type="radio" value="straight-line" name="selectedTool" class="tools_icon">
+                    <label for="line">
+                        <img class="tool_icon" src="./assets/img/svg/straight-line_icon.svg" alt="ícone de pincel">
+                    </label>
+                </div>
+                <div class="radio_symbol">
+                    <input type="radio" value="square" name="selectedTool" class="tools_icon">
+                    <label for="square">
+                        <img class="tool_icon" src="./assets/img/svg/square_icon.svg" alt="ícone de pincel">
+                    </label>
+                </div>
+                <div class="radio_symbol">
+                    <input type="radio" value="eraser" name="selectedTool" class="tools_icon">
+                    <label for="eraser">
+                        <img class="tool_icon" src="./assets/img/svg/eraser_icon.svg" alt="ícone de pincel">
+                    </label>
+                </div>
+            </form>
+        </article>
+        <article id="paint_board">
+
+        </article>
+    </main>
 </body>
 </html>
