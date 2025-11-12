@@ -1,15 +1,12 @@
-// FIXME: when the user selects a new tool the paintbrush starts to work, but it is suposed 
-// to work just when click in paint board
-
-
 const formTools = document.getElementById("controls");
-const paint_board = document.getElementById("paint_board");
+let paint_board = document.getElementById("paint_board");
 const undoButton = document.getElementById("undo_button");
 
 let counter = 0;
 
 let initialFormData = new FormData(formTools);
 let selectedColor = initialFormData.get("color");
+let selectedBrushSize = initialFormData.get("paint-brush-size");
 paint_board.addEventListener("mousedown", paint_brush);
 
 formTools.addEventListener("input", (event) => {
@@ -18,8 +15,8 @@ formTools.addEventListener("input", (event) => {
 
     let formData = new FormData(formTools);
 
-    // setMouseIcon(formData.get("selectedTool"));
     selectedColor = formData.get("color");
+    selectedBrushSize = formData.get("paint-brush-size");
 
     if(formData.get("selectedTool") === "paint-brush") {
         paint_board.addEventListener("mousedown", paint_brush);
@@ -31,40 +28,39 @@ undoButton.addEventListener("click", () => {
 
 
 function removeEventListersTool() {
-    paint_board.removeEventListener("mousedown", paint_brush());
+    paint_board.removeEventListener("mousedown", paint_brush);
 }
 
 function createPixel() {
-    if(event.target.classList.contains("stroke")) { return }
-
+    if(event.target.id !== paint_board.id) { return false}
+    
     let span = document.createElement("span");
     span.style.backgroundColor = selectedColor;
     span.classList.add("stroke");
     span.classList.add(`stroke${counter}`);
     span.style.left = `${event.layerX}px`;
     span.style.top = `${event.layerY}px`;
-    span.style.height = "10px";
-    span.style.width = "10px";
-
+    span.style.height = `${selectedBrushSize}px`;
+    span.style.width = `${selectedBrushSize}px`;
+    
     paint_board.appendChild(span);
+
+    return true;
 }
 function paint_brush() {
+    if(!createPixel()) {return false};
     paint_board.addEventListener("mousemove", createPixel);
 
     function stopPainting() {
         paint_board.removeEventListener("mousemove", createPixel);
-        // counter++;
-        // console.log(counter);
+        counter++;
+        console.log(counter);
+
+        paint_board.removeEventListener("mouseup", stopPainting);
+        paint_board.removeEventListener("mouseleave", stopPainting);
     }
 
-    paint_board.addEventListener("mouseup", () => {
-        stopPainting();
-        counter++;
-        console.log(counter);
-    });
-    paint_board.addEventListener("mouseleave", () => {
-        stopPainting();
-        counter++;
-        console.log(counter);
-    });
+    paint_board.addEventListener("mouseup", stopPainting);
+    paint_board.addEventListener("mouseleave", stopPainting);
+
 }
