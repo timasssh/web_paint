@@ -1,13 +1,17 @@
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 body {
     height: 100vh;
     width: 100vw;
     background-color: #ccc;
-    cursor: url('../img/ico/straight-line_icon.ico'), auto;
+}
+.icon {
+    max-height: 3ch;
+    max-width: 3ch;
+    cursor: pointer;
 }
 
 main {
@@ -17,6 +21,11 @@ main {
     display: flex;
     flex-direction: column;
 }
+#control_bar {
+    display: flex;
+    gap: 2ch;
+}
+
 #controls {
     display: flex;
     gap: 1ch;
@@ -59,7 +68,16 @@ main {
 }
 
 #paint_board {
+    position: relative;
+    display: block;
     background-color: #fff;
     height: 100%;
     width: 100%;
+
+    cursor: crosshair;
+}
+.stroke {
+    position: absolute;
+    border-radius: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
