@@ -10,7 +10,6 @@ let counter = 0;
 
 let initialFormData = new FormData(formTools);
 let selectedColor = initialFormData.get("color");
-// setMouseIcon(initialFormData.get("selectedTool"));
 paint_board.addEventListener("mousedown", paint_brush);
 
 formTools.addEventListener("input", (event) => {
@@ -30,11 +29,6 @@ undoButton.addEventListener("click", () => {
     console.log("undoing the last stroke...");
 })
 
-
-function setMouseIcon(selectedTool) {
-    let link = window.location;
-    document.body.style.cursor = `url('${link}/assets/img/ico/${selectedTool}_icon.ico'), auto`
-}
 
 function removeEventListersTool() {
     paint_board.removeEventListener("mousedown", paint_brush());
