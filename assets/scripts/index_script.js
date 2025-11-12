@@ -1,6 +1,7 @@
 const formTools = document.getElementById("controls");
 let paint_board = document.getElementById("paint_board");
 const undoButton = document.getElementById("undo_button");
+const saveImageButton = document.getElementById("save-image");
 
 let counter = 0;
 
@@ -62,5 +63,19 @@ function paint_brush() {
 
     paint_board.addEventListener("mouseup", stopPainting);
     paint_board.addEventListener("mouseleave", stopPainting);
-
 }
+
+saveImageButton.addEventListener("click", () => {
+    domtoimage.toPng(paint_board)
+        .then((dataUrl) => {
+            // saving the png image in the user computer using an A tag
+            
+            let link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = "myArt.png";
+            link.click();
+        })
+        .catch((error) => {
+            console.error("algo deu errado! ", error);
+        });
+});
