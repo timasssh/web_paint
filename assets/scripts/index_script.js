@@ -25,6 +25,8 @@ formTools.addEventListener("input", (event) => {
         paint_board.addEventListener("mousedown", paint_brush);
     }else if(selectedTool === "eraser") {
         paint_board.addEventListener("mousedown", eraser);
+    }else if(selectedTool === "bucket") {
+        paint_board.addEventListener("click", bucket);
     }
 });
 
@@ -32,6 +34,7 @@ formTools.addEventListener("input", (event) => {
 function removeEventListersTool() {
     paint_board.removeEventListener("mousedown", paint_brush);
     paint_board.removeEventListener("mousedown", eraser);
+    paint_board.removeEventListener("click", bucket);
 }
 function increaseCounter() {
     counter++;
@@ -84,7 +87,7 @@ function paint_brush() {
 function removeStroke() {
     let strokeClass = typeof arguments[0] === "string" ? arguments[0] : event.target.classList[1];
     
-    let strokeSpans = paint_board.querySelectorAll("span." + strokeClass);
+    let strokeSpans = paint_board.querySelectorAll(`span.${strokeClass}`);
 
     strokeSpans.forEach((span) => {
         span.remove();
@@ -108,6 +111,25 @@ function eraser() {
     paint_board.addEventListener("mouseup", stopErasing);
 }
 
+function changeBackgroundColorOfElement(element) {
+    element.style.backgroundColor = selectedColor;
+}
+function bucket() {
+    if(event.target.id !== paint_board.id && !event.target.classList.contains("stroke")) { return }
+
+    if(event.target.id === paint_board.id) {
+        changeBackgroundColorOfElement(paint_board);
+    }else {
+        let strokeClass = event.target.classList[1];
+        let strokeSpans = paint_board.querySelectorAll(`span.${strokeClass}`);
+
+        strokeSpans.forEach((span) => {
+            changeBackgroundColorOfElement(span);
+        });
+    }
+}
+
+// TODO: undo working on the "bucket" tool
 function undo() {
     decreaseCounter();
     let lastStrokeClass = `stroke${strokeClassIdentifier - 1}`;
