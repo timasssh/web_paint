@@ -9,6 +9,7 @@ let strokeClassIdentifier = 0;
 let initialFormData = new FormData(formTools);
 let selectedColor = initialFormData.get("color");
 let selectedBrushSize = initialFormData.get("paint-brush-size");
+let selectedStrokeRadius = initialFormData.get("stroke-radius");
 paint_board.addEventListener("mousedown", paint_brush);
 
 formTools.addEventListener("input", (event) => {
@@ -19,6 +20,7 @@ formTools.addEventListener("input", (event) => {
 
     selectedColor = formData.get("color");
     selectedBrushSize = formData.get("paint-brush-size");
+    selectedStrokeRadius = formData.get("stroke-radius");
     let selectedTool = formData.get("selectedTool");
 
     if(selectedTool === "paint-brush") {
@@ -40,9 +42,6 @@ function increaseCounter() {
     counter++;
     strokeClassIdentifier++;
 
-    console.log(counter + " " + strokeClassIdentifier);
-    
-
     undoButton.classList.remove("disabledIcon");
     undoButton.addEventListener("click", undo);
 }
@@ -63,6 +62,7 @@ function createPixel() {
     span.style.top = `${event.layerY}px`;
     span.style.height = `${selectedBrushSize}px`;
     span.style.width = `${selectedBrushSize}px`;
+    span.style.borderRadius = `${selectedStrokeRadius}%`;
     
     paint_board.appendChild(span);
 
